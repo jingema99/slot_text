@@ -21,11 +21,11 @@ class PARTNET(Dataset):
 
     def __getitem__(self, index):
         path = self.files[index]
-        image = Image.open(os.path.join(self.root_dir, self.split, path)).convert("RGB")
-        image = image.resize((128 , 128))
-        image = self.img_transform(image)
-        sample = {'image': image}
+        text_file = os.path.join(self.root_dir, self.split, path)
 
+        with open(text_file) as f:
+             line = f.readlines()[0]
+        sample = {'text': line}
         return sample
             
     
